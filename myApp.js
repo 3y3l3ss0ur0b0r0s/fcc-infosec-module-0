@@ -1,5 +1,16 @@
+// Had to downgrade helmet to version 2.3.0
+
 const express = require('express');
+
+// 0 - Require Helmet
+const helmet = require('helmet');
+
 const app = express();
+
+// 1 - Use middleware to hide 'X-Powered-By: Express' message in request (this knowledge can be exploited by hackers)
+app.use(helmet.hidePoweredBy());
+// 2 - Use middleware to prevent clickjacking attacks from <frame> or <iframe> manipulation
+app.use(helmet.frameguard({ action: 'deny' }));
 
 
 
